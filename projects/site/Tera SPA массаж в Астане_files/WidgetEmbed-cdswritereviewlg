@@ -1,0 +1,308 @@
+if (window.taValidate == undefined) {
+   window.taOnLoad   = window.onload;
+   window.taValList  = Array();
+   window.taValIndex = 0;
+   window.taValidate = function () {
+      if (window.taOnLoad != null) {
+         try {
+         window.taOnLoad();
+         } catch (err) { }
+      }
+      for (ii = 0; ii < window.taValIndex; ii=ii+1) {
+         fname = window.taValList[ii]
+         fname();
+      }
+   }
+   window.taAddValidator = function (fname) {
+      window.taValList[window.taValIndex] = fname;
+      window.taValIndex                   = window.taValIndex + 1;
+      }
+   window.onload = window.taValidate
+}
+window.taAddValidator (injectcdswritereviewlg7523)
+
+                  if(document.createStyleSheet) {
+        document.createStyleSheet("https://static.tacdn.com/css2/build/less/widget/build/cdswidWRL-v22812719696a.css");
+      } else {
+        var stylesImport = "@import url(' https://static.tacdn.com/css2/build/less/widget/build/cdswidWRL-v22812719696a.css ');";
+        var newSS=document.createElement('link');
+        newSS.rel='stylesheet';
+        newSS.href='data:text/css,'+escape(stylesImport);
+        if (document.getElementsByTagName("head")[0]) {
+            document.getElementsByTagName("head")[0].appendChild(newSS);
+        } else {             document.write('<link rel="stylesheet" href="data:text/css,' + escape(stylesImport) + '"/>');
+        }
+      }
+        
+      var newJs = document.createElement('script');
+    newJs.setAttribute('type', 'text/javascript');
+    newJs.setAttribute('src', 'https://static.tacdn.com/js3/widget/cdswidgets_m-c-v21072357980a.js');
+    document.getElementsByTagName("head")[0].appendChild(newJs);
+  
+// Returns true if we find a homepage link. Also, nofollows it if the homepage link in the embed code is nofollowed.
+function checkHomePageLink(link, isHomePageLinkNoFollow) {
+  var href = link.getAttribute('href');
+  if (href) {
+    var hrefsplit = href.split("/");
+    // Check for homepage link - if http(s)://tripadvisor.com or http(s)://tripadvisor.com/
+    // Now if we didn't find a nofollowed home page link in the embed code, we should not add a nofollow
+    // on the home page link in the rendered code.
+    if (hrefsplit.length == 3 || (hrefsplit.length == 4 && hrefsplit[3] == "")) {
+      if (isHomePageLinkNoFollow) {
+        link.setAttribute('rel', 'nofollow');
+      }
+      // Else, don't do anything. Also, we have handled the link so we don't need to check alt/anchor text for this
+      return true;
+    }
+  }
+  return false;
+}
+
+function injectcdswritereviewlg7523() {
+    var container = document.getElementById('TA_cdswritereviewlg107');
+  if (container == null) {
+        var scriptTags = document.getElementsByTagName("script");
+    for (var i=0; i<scriptTags.length; i++)
+    {
+      if (scriptTags[i] != null && scriptTags[i].src != null &&
+          scriptTags[i].src.indexOf("cdswritereviewlg?uniq=107") >= 0)
+      {
+        var msgElem = document.createElement('div');
+        if (msgElem != null && msgElem != 'undefined')
+        {
+          msgElem.style.margin='8px';
+          msgElem.style.color='red';
+          msgElem.innerHTML="&#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1100;&#1090;&#1077; &#1082;&#1086;&#1076; TripAdvisor &#1080; &#1087;&#1086;&#1074;&#1090;&#1086;&#1088;&#1080;&#1090;&#1077; &#1091;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1091;.";
+          var parentElem = scriptTags[i].parentNode;
+          if (parentElem != null && parentElem != 'undefined')
+          {
+            parentElem.appendChild(msgElem);
+          }
+          break;
+        }
+      }
+    }
+    return;
+  }
+
+  // The following block of code takes care of gathering information from the embed code about whether we should follow
+  // or nofollow a link in the rendered code. If the user wants to nofollow links to tripadvisor, we should respect that
+  // The logic is as follows - if we find the same link in the embed and rendered code, they both should have the same
+  // nofollow status. If we find a link in the rendered code which is not present in the embedded code, we should
+  // nofollow it. The home page link is an exception to this rule where homepage link should always be followed unless
+  // the user explicitely nofollows it.
+  // Two links are same in embed and rendered code if - the anchor text matches for text link and the alt text matches
+  // for image links. Two image links with no alt text are considered same as well. If we find multiple links with
+  // same anchor text or same alt text in the embed code, only one of them have nofollow, adds nofollow to all the
+  // corresponding links in the rendered code. For more information please check https://jira.tripadvisor.com/browse/SEO-1902
+
+  var imageStatus = {};
+  var linkStatus = {};
+  // Collect all the nofollow attributes for text and image links
+  var links = container.getElementsByTagName('a');
+  var isHomePageLinkNoFollow = false;
+  if (links) {
+    for (var i = 0; i < links.length; i++) {
+
+      hasNoFollow = links[i].getAttribute('rel') && links[i].getAttribute('rel') == 'nofollow';
+
+      // Special case for homepage link
+      var href = links[i].getAttribute('href');
+
+      // If we didn't find a nofollowed home page link already, keep looking for one. Do this check only if the
+      // link in question has nofollow set on it
+      if (hasNoFollow && href && !isHomePageLinkNoFollow) {
+        if (href.indexOf('tripadvisor') > -1) {
+          var hrefsplit = href.split("/");
+          // Check if it's actually a homepage link - if http(s)://tripadvisor.com or http(s)://tripadvisor.com/
+          // and set the nofollow status of that link. Note we are interested in the case where home page link
+          // is nofollowed
+          if (hrefsplit.length == 3 || (hrefsplit.length == 4 && hrefsplit[3] == "")) {
+            isHomePageLinkNoFollow = hasNoFollow;
+            continue;
+          }
+        }
+      }
+
+      // Check if it's an image link. If it is, use the alt attribute as the key in the map.
+      var images = links[i].getElementsByTagName("img");
+      if (images && images.length > 0) {
+        // Check if it's an image link
+        if (images[0].getAttribute('alt')) {
+          imageStatus[images[0].getAttribute('alt').trim()] = hasNoFollow;
+        }
+        // No alt attribute case
+        else {
+          // This is to handle multiple links in the embed code without alt text. In this case if at least one link has
+          // nofollow, we nofollow all the no alt text links in the rendered code
+          if (! imageStatus[""]) {
+            imageStatus[""] = hasNoFollow;
+          }
+        }
+      }
+      // If not use the anchor text.
+      else if(links[i].text) {
+        var anchorText = links[i].text;
+        if (!anchorText in linkStatus || !linkStatus[anchorText]) {
+          linkStatus[anchorText] = hasNoFollow;
+        }
+      }
+    }
+  }
+
+  
+  var holderElement = document.createElement('div');
+  holderElement.innerHTML = '<link rel=\'stylesheet\' type=\'text/css\' href=\'https://static.tacdn.com/css2/styleguide-v2816397456a.css\' data-rup=\'styleguide\'/> '+
+'<div id="CDSWIDWRL" class="widWRL"> '+
+'<div class="widWRLData border "> '+
+'<div class="widWRLBranding"> '+
+'<dl> '+
+'<dt> '+
+'<a target="_blank" href="https://www.tripadvisor.ru/"><img src="https://www.tripadvisor.ru/img/cdsi/img2/branding/medium-logo-12097-2.png" alt="TripAdvisor"/></a> '+
+'</dt> '+
+'<dt class="messaging">&#1047;&#1085;&#1072;&#1090;&#1100; &#1073;&#1086;&#1083;&#1100;&#1096;&#1077;. &#1041;&#1088;&#1086;&#1085;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; &#1087;&#1088;&#1086;&#1097;&#1077;. &#1055;&#1091;&#1090;&#1077;&#1096;&#1077;&#1089;&#1090;&#1074;&#1086;&#1074;&#1072;&#1090;&#1100; &#1083;&#1091;&#1095;&#1096;&#1077;.</dt> </dl> '+
+'</div> '+
+'<div class="widWRLLink"> '+
+'<a target=_blank href="https://www.tripadvisor.ru/Attraction_Review-g293944-d11778498-Reviews-Tera_SPA-Astana_Akmola_Province.html" onclick="ta.cds.handleTALink(12097,this);return true;">Tera SPA</a> </div> '+
+'<form action="https://www.tripadvisor.ru/UserReview-g293944-d11778498-Tera_SPA-Astana_Akmola_Province.html" target="_blank" name="cdsWRLForm8035" id="cdsWRLForm8035" onsubmit="ta.cds.handleTALink(12097,this);return false;"> '+
+'<input type="hidden" id="rating08035" value="(&#1053;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077;, &#1095;&#1090;&#1086;&#1073;&#1099; &#1086;&#1094;&#1077;&#1085;&#1080;&#1090;&#1100;)"/> '+
+'<input type="hidden" id="rating18035" value="&#1059;&#1078;&#1072;&#1089;&#1085;&#1086;"/> '+
+'<input type="hidden" id="rating28035" value="&#1055;&#1083;&#1086;&#1093;&#1086;"/> '+
+'<input type="hidden" id="rating38035" value="&#1053;&#1077;&#1087;&#1083;&#1086;&#1093;&#1086;"/> '+
+'<input type="hidden" id="rating48035" value="&#1061;&#1086;&#1088;&#1086;&#1096;&#1086;"/> '+
+'<input type="hidden" id="rating58035" value="&#1054;&#1090;&#1083;&#1080;&#1095;&#1085;&#1086;"/> '+
+'<input type="hidden" id="defaultTitle8035" value="&#1044;&#1086;&#1073;&#1072;&#1074;&#1100;&#1090;&#1077; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1077; &#1082; &#1089;&#1074;&#1086;&#1077;&#1084;&#1091; &#1086;&#1090;&#1079;&#1099;&#1074;&#1091; - &#1054;&#1087;&#1080;&#1096;&#1080;&#1090;&#1077; &#1074;&#1072;&#1096;&#1077; &#1087;&#1088;&#1077;&#1073;&#1099;&#1074;&#1072;&#1085;&#1080;&#1077; &#1086;&#1076;&#1085;&#1080;&#1084; &#1082;&#1086;&#1088;&#1086;&#1090;&#1082;&#1080;&#1084; &#1087;&#1088;&#1077;&#1076;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077;&#1084;."/> '+
+'<input type="hidden" id="reviewTitle8035" name="ReviewTitle"/> '+
+'<div class="widWRLRating"> '+
+'<input type="hidden" name="qid10" id="qid108035" value="0"/> '+
+'<span class="widWRLRate ui_bubble_rating bubble_0" id="ratingSpan" onclick="return selectRating(this, event, true, 8035);" onmousemove="return selectRating(this, event, false, 8035);" onmouseout="return lastSetRating(this, 8035);"> '+
+'</span> '+
+'<span id="ratingText8035" class="widWRLRatingTextSmall">(&#1053;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077;, &#1095;&#1090;&#1086;&#1073;&#1099; &#1086;&#1094;&#1077;&#1085;&#1080;&#1090;&#1100;) '+
+'</span> '+
+'</div> '+
+'<div class="widWRLReview"> '+
+'<textarea id="taWRLTitle8035" onFocus="initTextArea(this);" rows="3" cols="30" onkeypress="limitLength(this, 120);">&#1044;&#1086;&#1073;&#1072;&#1074;&#1100;&#1090;&#1077; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1077; &#1082; &#1089;&#1074;&#1086;&#1077;&#1084;&#1091; &#1086;&#1090;&#1079;&#1099;&#1074;&#1091; - &#1054;&#1087;&#1080;&#1096;&#1080;&#1090;&#1077; &#1074;&#1072;&#1096;&#1077; &#1087;&#1088;&#1077;&#1073;&#1099;&#1074;&#1072;&#1085;&#1080;&#1077; &#1086;&#1076;&#1085;&#1080;&#1084; &#1082;&#1086;&#1088;&#1086;&#1090;&#1082;&#1080;&#1084; &#1087;&#1088;&#1077;&#1076;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077;&#1084;.</textarea> '+
+'</div> '+
+'<div class="widWRLButton"> '+
+'<input type="submit" id="taWRLContinue8035" name="taWRLContinue8035" value="&#1055;&#1088;&#1086;&#1076;&#1086;&#1083;&#1078;&#1080;&#1090;&#1100;" onclick="checkTextArea(8035);" style="background:url(https://static.tacdn.com/img2/sprites/yellow-button.png) 0 0 repeat-x #EA9523;"/> </div> '+
+'</form> '+
+'</div> '+
+'</div> '+
+'';
+
+  var links = holderElement.getElementsByTagName('a');
+  if (links) {
+    for (var i = 0; i < links.length; i++) {
+
+      // Special case for homepage link. The function returns true if we find a homepage link. In that case, we don't
+      // to apply other rules.
+      if(checkHomePageLink(links[i], isHomePageLinkNoFollow)) {
+        continue;
+      }
+
+      // Check if it's an image link
+      var images = links[i].getElementsByTagName("img");
+      if (images && images.length > 0) {
+        // If the image has alt attribute
+        if (images[0].getAttribute('alt')) {
+          var key = images[0].getAttribute('alt').trim();
+          if (! (key in imageStatus) || imageStatus[key]) {
+            links[i].setAttribute('rel', 'nofollow');
+          }
+        }
+        // No alt attribute case. The no follow status for those are stored under "". If no alt attribute links in
+        // embed code don't exist, we should nofollow any no alt attribute links in the rendered code. Unless it's a
+        // homepage but we handled that above. I haven't seen any no alt non-homepage image link in the rendered code
+        // so this is just a safeguard
+        else {
+          if(! ("" in imageStatus) || imageStatus[""]) {
+            links[i].setAttribute('rel', 'nofollow');
+          }
+        }
+      }
+      else {
+        if (links[i].text) {
+          var key = links[i].text.trim();
+          if (! (key in linkStatus) || linkStatus[key]) {
+            links[i].setAttribute('rel', 'nofollow');
+          }
+        }
+      }
+    }
+
+    widgetHtml = holderElement.innerHTML;
+  }
+  else {
+    var widgetHtml = '<link rel=\'stylesheet\' type=\'text/css\' href=\'https://static.tacdn.com/css2/styleguide-v2816397456a.css\' data-rup=\'styleguide\'/> '+
+'<div id="CDSWIDWRL" class="widWRL"> '+
+'<div class="widWRLData border "> '+
+'<div class="widWRLBranding"> '+
+'<dl> '+
+'<dt> '+
+'<a target="_blank" href="https://www.tripadvisor.ru/"><img src="https://www.tripadvisor.ru/img/cdsi/img2/branding/medium-logo-12097-2.png" alt="TripAdvisor"/></a> '+
+'</dt> '+
+'<dt class="messaging">&#1047;&#1085;&#1072;&#1090;&#1100; &#1073;&#1086;&#1083;&#1100;&#1096;&#1077;. &#1041;&#1088;&#1086;&#1085;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; &#1087;&#1088;&#1086;&#1097;&#1077;. &#1055;&#1091;&#1090;&#1077;&#1096;&#1077;&#1089;&#1090;&#1074;&#1086;&#1074;&#1072;&#1090;&#1100; &#1083;&#1091;&#1095;&#1096;&#1077;.</dt> </dl> '+
+'</div> '+
+'<div class="widWRLLink"> '+
+'<a target=_blank href="https://www.tripadvisor.ru/Attraction_Review-g293944-d11778498-Reviews-Tera_SPA-Astana_Akmola_Province.html" onclick="ta.cds.handleTALink(12097,this);return true;">Tera SPA</a> </div> '+
+'<form action="https://www.tripadvisor.ru/UserReview-g293944-d11778498-Tera_SPA-Astana_Akmola_Province.html" target="_blank" name="cdsWRLForm8035" id="cdsWRLForm8035" onsubmit="ta.cds.handleTALink(12097,this);return false;"> '+
+'<input type="hidden" id="rating08035" value="(&#1053;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077;, &#1095;&#1090;&#1086;&#1073;&#1099; &#1086;&#1094;&#1077;&#1085;&#1080;&#1090;&#1100;)"/> '+
+'<input type="hidden" id="rating18035" value="&#1059;&#1078;&#1072;&#1089;&#1085;&#1086;"/> '+
+'<input type="hidden" id="rating28035" value="&#1055;&#1083;&#1086;&#1093;&#1086;"/> '+
+'<input type="hidden" id="rating38035" value="&#1053;&#1077;&#1087;&#1083;&#1086;&#1093;&#1086;"/> '+
+'<input type="hidden" id="rating48035" value="&#1061;&#1086;&#1088;&#1086;&#1096;&#1086;"/> '+
+'<input type="hidden" id="rating58035" value="&#1054;&#1090;&#1083;&#1080;&#1095;&#1085;&#1086;"/> '+
+'<input type="hidden" id="defaultTitle8035" value="&#1044;&#1086;&#1073;&#1072;&#1074;&#1100;&#1090;&#1077; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1077; &#1082; &#1089;&#1074;&#1086;&#1077;&#1084;&#1091; &#1086;&#1090;&#1079;&#1099;&#1074;&#1091; - &#1054;&#1087;&#1080;&#1096;&#1080;&#1090;&#1077; &#1074;&#1072;&#1096;&#1077; &#1087;&#1088;&#1077;&#1073;&#1099;&#1074;&#1072;&#1085;&#1080;&#1077; &#1086;&#1076;&#1085;&#1080;&#1084; &#1082;&#1086;&#1088;&#1086;&#1090;&#1082;&#1080;&#1084; &#1087;&#1088;&#1077;&#1076;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077;&#1084;."/> '+
+'<input type="hidden" id="reviewTitle8035" name="ReviewTitle"/> '+
+'<div class="widWRLRating"> '+
+'<input type="hidden" name="qid10" id="qid108035" value="0"/> '+
+'<span class="widWRLRate ui_bubble_rating bubble_0" id="ratingSpan" onclick="return selectRating(this, event, true, 8035);" onmousemove="return selectRating(this, event, false, 8035);" onmouseout="return lastSetRating(this, 8035);"> '+
+'</span> '+
+'<span id="ratingText8035" class="widWRLRatingTextSmall">(&#1053;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077;, &#1095;&#1090;&#1086;&#1073;&#1099; &#1086;&#1094;&#1077;&#1085;&#1080;&#1090;&#1100;) '+
+'</span> '+
+'</div> '+
+'<div class="widWRLReview"> '+
+'<textarea id="taWRLTitle8035" onFocus="initTextArea(this);" rows="3" cols="30" onkeypress="limitLength(this, 120);">&#1044;&#1086;&#1073;&#1072;&#1074;&#1100;&#1090;&#1077; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1077; &#1082; &#1089;&#1074;&#1086;&#1077;&#1084;&#1091; &#1086;&#1090;&#1079;&#1099;&#1074;&#1091; - &#1054;&#1087;&#1080;&#1096;&#1080;&#1090;&#1077; &#1074;&#1072;&#1096;&#1077; &#1087;&#1088;&#1077;&#1073;&#1099;&#1074;&#1072;&#1085;&#1080;&#1077; &#1086;&#1076;&#1085;&#1080;&#1084; &#1082;&#1086;&#1088;&#1086;&#1090;&#1082;&#1080;&#1084; &#1087;&#1088;&#1077;&#1076;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077;&#1084;.</textarea> '+
+'</div> '+
+'<div class="widWRLButton"> '+
+'<input type="submit" id="taWRLContinue8035" name="taWRLContinue8035" value="&#1055;&#1088;&#1086;&#1076;&#1086;&#1083;&#1078;&#1080;&#1090;&#1100;" onclick="checkTextArea(8035);" style="background:url(https://static.tacdn.com/img2/sprites/yellow-button.png) 0 0 repeat-x #EA9523;"/> </div> '+
+'</form> '+
+'</div> '+
+'</div> '+
+'';
+  }
+
+    
+    if (widgetHtml.indexOf("WIDGET_ERR_LINKS") != -1) {
+    var linksDiv = document.createElement('div');
+
+    var links = container.getElementsByTagName("a");
+    if (links) {
+      for (var i=0; i<links.length; ++i) {
+                if (links[i].getElementsByTagName("img").length > 0) {
+          if (widgetHtml.indexOf("WIDGET_ERR_IMAGE_LINK")) {
+            widgetHtml = widgetHtml.replace('<a id="WIDGET_ERR_IMAGE_LINK" href="http://www.tripadvisor.com/" target="_blank">' ,'<a href="' + links[i] + '" target="_blank">');
+            widgetHtml = widgetHtml.replace('Reviews of Hotels, Flights and Vacation Rentals', links[i].getElementsByTagName("img")[0].alt);
+          }
+        }
+        else {
+          linkDiv = document.createElement('div');
+          links[i].setAttribute('target', '_blank');
+          linkDiv.appendChild(links[i].cloneNode(true));
+          if (linksDiv.getElementsByTagName("div").length == 0) {
+            linkDiv.style.margin="8px 0 0 0";
+          }
+          linksDiv.appendChild(linkDiv);
+        }
+      }
+            var cdsWidgetKey = 'cdswritereviewlg';
+      if (linksDiv.hasChildNodes() && (cdsWidgetKey != "cdshac")) {
+        linksDiv.insertBefore(document.createTextNode("Подробнее на TripAdvisor"), linksDiv.firstChild);       } 
+    }
+
+    widgetHtml = widgetHtml.replace('<div id="WIDGET_ERR_LINKS"></div>', linksDiv.innerHTML);
+  }
+
+  
+  container.innerHTML = widgetHtml; 
+}

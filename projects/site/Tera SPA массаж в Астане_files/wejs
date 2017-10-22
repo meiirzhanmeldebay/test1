@@ -1,0 +1,1 @@
+document.write( '<script src="https://www.tripadvisor.ru/WidgetEmbed-cdswritereviewlg?lang=ru&locationId=11778498&display_version=2&uniq=107"></script>' );

@@ -1,0 +1,44 @@
+if (typeof window.PozvonimcomLoader == "undefined") {
+	var PozvonimcomWidgetRootConfig = {"apiPath":"\/\/api.pozvonim.com\/widget\/callback\/v3\/47161","cdnPath":"\/\/cdn.pozvonim.com","apiHiloadPath":"\/\/api.pozvonim.com\/widget","rootPath":"\/\/pozvonim.com\/","sendEvents":true,"id":47161,"user_id":52032,"site_key":"6b4186678bbaa895529f823744d1e549","site_id":47161,"referal_url":"http:\/\/pozvonim.com\/?from=widget","callback":{"is_enable":false},"chat":{"is_enable":false,"sounds":[]},"email":{"is_enable":true,"webTracking":{"message_sent":{"name":"email:message_sent","title":"\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u043e\u0442\u043f\u0440\u0430\u0432\u0438\u043b email \u0447\u0435\u0440\u0435\u0437 \u0443\u043c\u043d\u044b\u0439 \u0432\u0438\u0434\u0436\u0435\u0442 \u043e\u0431\u0440\u0430\u0442\u043d\u043e\u0439 \u0441\u0432\u044f\u0437\u0438"}},"webTrackingServices":{"yandex_metrika":[],"google_analytics":{"category":"pozvonim"},"google_tag_manager":[],"mail_counter":[],"yagla":[],"roistat":[]},"blacklist":{"url":[],"referer":[]}},"feedback":{"is_enable":0,"blacklist":{"url":[],"referer":[]}},"mobileButton":{"is_enable":false},"fingerprint":false,"userInfo":true,"userInfoProto":"https:","language":{"days":{"sunday":"\u0412\u043e\u0441\u043a\u0440\u0435\u0441\u0435\u043d\u044c\u0435","monday":"\u041f\u043e\u043d\u0435\u0434\u0435\u043b\u044c\u043d\u0438\u043a","tuesday":"\u0412\u0442\u043e\u0440\u043d\u0438\u043a","wednesday":"\u0421\u0440\u0435\u0434\u0430","thursday":"\u0427\u0435\u0442\u0432\u0435\u0440\u0433","friday":"\u041f\u044f\u0442\u043d\u0438\u0446\u0430","saturday":"\u0421\u0443\u0431\u0431\u043e\u0442\u0430"}},"geo":{"default_country_code":"RU"}};
+	PozvonimcomWidgetRootConfig.ip="5.34.80.209";
+PozvonimcomWidgetRootConfig.widget_id=159355219;
+PozvonimcomWidgetRootConfig.time=1497713286;
+PozvonimcomWidgetRootConfig.is_mobile=false;
+PozvonimcomWidgetRootConfig.build=1495529971;
+PozvonimcomWidgetRootConfig.geo.country_id=1522867;
+PozvonimcomWidgetRootConfig.geo.country_code="KZ";
+PozvonimcomWidgetRootConfig.geo.country_name="\u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d";
+PozvonimcomWidgetRootConfig.geo.city_id=1526384;
+PozvonimcomWidgetRootConfig.geo.city_name="\u0410\u043b\u043c\u0430-\u0410\u0442\u0430";
+PozvonimcomWidgetRootConfig.geo.state_id=1526395;
+PozvonimcomWidgetRootConfig.geo.state_name="\u0410\u043b\u043c\u0430\u0442\u044b";
+PozvonimcomWidgetRootConfig.geo.ids=[1526384,1526395,1522867,6255147];
+PozvonimcomWidgetRootConfig.data={"date":"2017-06-17T15:28:06+0000","hour":"15","days":["sunday","monday","tuesday","wednesday","thursday","friday","saturday"],"offset":"0","day_of_week":"6","day_name":"saturday","utc":"2017-06-17T15:28:06+0000"};
+PozvonimcomWidgetRootConfig.geo.cases={"nominative":"\u0410\u043b\u043c\u0430-\u0430\u0442\u0430","genitive":"\u0410\u043b\u043c\u0430-\u0430\u0442\u044b","prepositional":"\u0410\u043b\u043c\u0430-\u0430\u0442\u0435"};
+	if (PozvonimcomWidgetRootConfig.callback) {
+		PozvonimcomWidgetRootConfig.callback.data = PozvonimcomWidgetRootConfig.data;
+			}
+    if (PozvonimcomWidgetRootConfig.chat) {
+			}
+		var PozvonimcomLoader = function (d, s, u, p) {
+		"use strict";
+		var o = d.createElement(s);
+		p = d.getElementsByTagName(s)[0];
+		o.async = 1;
+		//o.crossOrigin='use-credentials';
+		o.src = u;
+		o.charset="UTF-8";
+		p.parentNode.insertBefore(o, p);
+	};
+		if(location.hash && location.hash == '#ioioo'){
+		PozvonimcomWidgetRootConfig.apiHiloadPath = PozvonimcomWidgetRootConfig.apiHiloadPath.replace('api.pozvonim.com','api.ioioo.ru');
+		PozvonimcomWidgetRootConfig.apiPath = PozvonimcomWidgetRootConfig.apiPath.replace('api.pozvonim.com','api.ioioo.ru');
+		PozvonimcomLoader(document, 'script', '//cdn.ioioo.ru/widget/pozvonim.min.js?build=1497713286');	
+	} else if(location.hash && location.hash == '#pvz'){
+		PozvonimcomWidgetRootConfig.apiHiloadPath = PozvonimcomWidgetRootConfig.apiHiloadPath.replace('api.pozvonim.com','api.hohope.ru');
+		PozvonimcomWidgetRootConfig.apiPath = PozvonimcomWidgetRootConfig.apiPath.replace('api.pozvonim.com','api.hohope.ru');
+		PozvonimcomLoader(document, 'script', '//cdn.hohope.ru/widget/pozvonim.min.js?build=1497713286');	
+	} else {	
+		PozvonimcomLoader(document, 'script', '//cdn.pozvonim.com/widget/pozvonim.min.js?build=1495529971');	
+	}
+}
